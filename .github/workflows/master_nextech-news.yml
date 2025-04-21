@@ -33,7 +33,7 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd client/dist/client/browser
-          zip -r ../../../release.zip 
+          zip -r ../../../../release.zip .  # <- the dot matters!
           cd -
 
       - name: Upload artifact for deployment job
