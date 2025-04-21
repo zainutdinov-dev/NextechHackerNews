@@ -50,7 +50,7 @@ This solution uses Azure CI/CD for Angular and Services to build, test, and depl
 2. Open a new terminal, navigate to the `client\` folder, then run: `ng serve`
 3. Make sure the API is running at `https://localhost:7128`. If it's not, update the API URL in the Angular environment file:
 - Open: `client\src\environments\environment.ts`[Environment File](client/src/environments/environment.ts)
-- Modify `apiUrl` to match your API's actual URL, e.g.: 'http://localhost:5168' from launch settings `api\NewestStories\Properties\launchSettings.json`[Environment File](api/NewestStories\Properties/launchSettings.json)
+- Modify `apiUrl` to match your API's actual URL, e.g.: 'http://localhost:5168' from launch settings `api\NewestStories\Properties\launchSettings.json`[Environment File](api/NewestStories/Properties/launchSettings.json)
 
 ### To execute tests:
 
