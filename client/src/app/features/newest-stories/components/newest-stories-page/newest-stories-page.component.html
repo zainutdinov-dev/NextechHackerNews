@@ -27,5 +27,9 @@
         </div>
         }
     </div>
+
+    @if (isInit){
+    <app-pagination [pagination]="this.pagination()" (change)="onPageChanged($event)"></app-pagination>
+    }
     }
 </div>

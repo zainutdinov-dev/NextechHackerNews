@@ -4,12 +4,12 @@
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <div>
             <label for="alias" class="block mb-1">Hacker Alias</label>
-            <input id="alias" formControlName="alias" type="text" class="hacker-input" />
+            <input id="alias" formControlName="alias" type="text" class="hacker-input" autocomplete="off" />
         </div>
 
         <div>
             <label for="email" class="block mb-1">Encrypted Email</label>
-            <input id="email" formControlName="email" type="email" class="hacker-input" placeholder="encrypted@gmail.com" />
+            <input id="email" formControlName="email" type="email" class="hacker-input" placeholder="encrypted@gmail.com" autocomplete="email" />
             @if (showEncryptionError) {
             <div class="text-red-400 text-sm mt-1">❗ Please enter encrypted email.</div>
             }

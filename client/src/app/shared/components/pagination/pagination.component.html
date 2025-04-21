@@ -3,6 +3,13 @@
     {
     <p class="pagination-info">No results</p>
     }@else {
+
+    @if (this.pages.length < 2){
+    <p class="pagination-info">
+        Showing <span class="font-medium">{{this.totalItemsCount}}</span> results
+    </p>
+    }
+    @else{
     <p class="pagination-info">
         Showing
         <span class="font-medium">{{this.startItemIndex}}</span>
@@ -11,9 +18,9 @@
         of
         <span class="font-medium">{{this.totalItemsCount}}</span>
         results
-    </p>
+    </p>}
 
-    @if (this.pageTo > 1){
+    @if (this.pages.length > 1){
     <nav class="inline-flex -space-x-px" aria-label="Pagination">
         <a (click)="onChange(this.selectedPage -1)" class="rounded-l-md page-button">
             <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
