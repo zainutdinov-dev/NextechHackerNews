@@ -25,15 +25,25 @@ jobs:
 
       - name: npm install, build, and test
         run: |
+          cd client
           npm install
-          npm run build --if-present
-          npm run test --if-present
-      
+          npm run build
+          npx ng test
+
+      - name: Copy web.config
+        run: |
+          cp client/server.web.config client/dist/client/browser/web.config
+
+      - name: Zip artifact for deployment
+        run: |
+          cd client/dist/client/browser
+          zip -r ../../../../release.zip .  # <- the dot matters!
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
