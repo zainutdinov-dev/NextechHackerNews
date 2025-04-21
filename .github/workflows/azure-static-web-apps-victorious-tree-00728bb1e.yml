@@ -36,7 +36,7 @@ jobs:
           api_location: ""
           app_build_command: "npm run build -- --configuration production"
           output_location: "dist/client"
-          routes_location: "client/routes.json"
+          routes_location: "client"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
