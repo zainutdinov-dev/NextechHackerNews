@@ -36,3 +36,25 @@
 
 ✅ **Link Submission:**
    - Provide the link to your GitHub repository and the deployed solution on Azure.
+
+## Readme
+
+### To deploy:
+This solution uses Azure CI/CD pipelines for both the Angular front-end and the backend services. `github/workflows/azure-static-web-apps-victorious-tree-00728bb1e.yml`
+- The Angular client is deployed to an Azure Static Web App.
+- Each API controller is independently deployed to its own Azure App Service.
+
+### To run locally:
+1. Open a terminal and navigate to the `api\NewestStories` folder, then run: `dotnet run`
+2. Open a new terminal, navigate to the `client\` folder, then run: `ng serve`
+3. Make sure the API is running at `https://localhost:7128`. If it's not, update the API URL in the Angular environment file:
+- Open: `client\src\environments\environment.ts`
+- Modify `apiUrl` to match your API's actual URL, e.g.: 'http://localhost:5168' from launch settings `api/NewestStories/Properties/launchSettings.json`
+
+### To execute tests:
+
+1. Open a terminal and navigate to the root folder, then run: `dotnet test`
+2. Navigate to the `client\`, then run : `ng test`
+
+### To celebrate Easter:
+Psst... there's a little Easter Egg hidden in the contact form. Can you find it? 🐣
