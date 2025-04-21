@@ -38,7 +38,7 @@ namespace NewestStories.Unit.Tests
                 storyIds.Add(i + 1);
             }
 
-            hackerNewsClientMock.Setup(c => c.GetAsync<List<int>>("newstories.json"))
+            hackerNewsClientMock.Setup(c => c.GetAsync<List<int>>(NewestStoriesService.LIST_ID_PATH))
                 .ReturnsAsync(storyIds);
 
             var hackerStories = new List<HackerNewsStory>();
@@ -103,7 +103,7 @@ namespace NewestStories.Unit.Tests
                 storyIds.Add(i + 1);
             }
 
-            hackerNewsClientMock.Setup(c => c.GetAsync<List<int>>("newstories.json"))
+            hackerNewsClientMock.Setup(c => c.GetAsync<List<int>>(NewestStoriesService.LIST_ID_PATH))
                 .ReturnsAsync(storyIds);
 
             var hackerStories = new List<HackerNewsStory>();
@@ -150,6 +150,53 @@ namespace NewestStories.Unit.Tests
             for (int i = 0; i < foundStories.Count; i++)
             {
                 Assert.Contains(SEARCH_TEMPLATE, foundStories[i].Title);
+            }
+        }
+
+        [Fact]
+        public async Task Should_ReturnCaseInsensitiveResults()
+        {
+            var service = CreateService();
+
+            var hackerStories = new List<HackerNewsStory>();
+
+            for (int id = 0; id < 10; id++)
+            {
+                var hackerStory = new HackerNewsStory
+                {
+                    id = id,
+                    title = $"TiTle {id}",
+                };
+
+                hackerStories.Add(hackerStory);
+
+                hackerNewsFetcherMock.Setup(f => f.GetStoryByIdAsync(id))
+                    .ReturnsAsync(hackerStory);
+
+                mapperMock.Setup(m => m.Map<StoryDto>(hackerStory))
+                    .Returns(new StoryDto { Id = hackerStory.id, Title = hackerStory.title });
+            }
+
+            var ids = hackerStories.Select(q => q.id).ToList();
+
+            hackerNewsClientMock.Setup(c => c.GetAsync<List<int>>(NewestStoriesService.LIST_ID_PATH))
+               .ReturnsAsync(ids);
+
+            var requestDto = new NewestStoriesRequestDto
+            {
+                PageIndex = 1,
+                PageSize = NewestStoriesRequestDto.MAX_PAGE_SIZE,
+                SearchText = "tle"
+            };
+
+            var foundStories = (await service.GetNewestStoriesAsync(requestDto)).Stories;
+
+            Assert.Equal(hackerStories.Count, foundStories.Count);
+
+            for (int i = 0; i < foundStories.Count; i++)
+            {
+                Assert.Equal(hackerStories[i].id, foundStories[i].Id);
+                Assert.Equal(hackerStories[i].title, foundStories[i].Title);
             }
         }
     }

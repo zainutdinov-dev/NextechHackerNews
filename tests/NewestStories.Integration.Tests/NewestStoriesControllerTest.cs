@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 using Moq;
 using System.Net;
+using NewestStories.Services;
 
 namespace NewestStories.Integration.Tests
 {
@@ -25,7 +26,7 @@ namespace NewestStories.Integration.Tests
         {
             var items = new HackerNewsStoryFaker().Generate(itemsCount);
 
-            factory.HackerNewsClientMock.Setup(client => client.GetAsync<List<int>>("newstories.json"))
+            factory.HackerNewsClientMock.Setup(client => client.GetAsync<List<int>>(NewestStoriesService.LIST_ID_PATH))
                 .ReturnsAsync(items.Select(q => q.id).ToList());
 
             foreach (var item in items)

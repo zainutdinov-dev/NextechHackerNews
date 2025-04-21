@@ -7,6 +7,8 @@ namespace NewestStories.Services
 {
     public class NewestStoriesService: INewestStoriesService
     {
+        public const string LIST_ID_PATH = "newstories.json";
+
         private readonly IHackerNewsClient hackerNewsClient;
         private readonly IHackerNewsFetcher hackerNewsFetcher;
         private readonly IMapper mapper;
@@ -36,7 +38,9 @@ namespace NewestStories.Services
             {
                 var storiesQuery = (await FetchStories(newestStoriesIds)).AsQueryable();
 
-                storiesQuery = storiesQuery.Where(q => q.Title.Contains(requestDto.SearchText));
+                var searchTextLower = requestDto.SearchText.ToLower();
+
+                storiesQuery = storiesQuery.Where(q => q.Title.ToLower().Contains(searchTextLower));
 
                 totalItemsCount = storiesQuery.Count();
 
@@ -89,7 +93,7 @@ namespace NewestStories.Services
 
         private async Task<List<int>> GetNewestStoriesIdsAsync()
         {
-            var ids = await hackerNewsClient.GetAsync<List<int>>("newstories.json");
+            var ids = await hackerNewsClient.GetAsync<List<int>>(LIST_ID_PATH);
 
             return ids ?? new List<int>();
         }
