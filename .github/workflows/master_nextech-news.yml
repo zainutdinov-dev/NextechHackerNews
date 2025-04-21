@@ -32,12 +32,12 @@ jobs:
 
       - name: Copy server.js
         run: |
-          cp client/server.js client/dist/client/server.js
+          cp client/server.js client/dist/client/browser/server.js
 
       - name: Zip artifact for deployment
         run: |
-          cd client/dist/client
-          zip -r ../../../release.zip .  # <- the dot matters!
+          cd client/dist/client/browser
+          zip -r ../../../../release.zip .  # <- the dot matters!
           cd -
 
       - name: Upload artifact for deployment job

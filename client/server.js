@@ -5,11 +5,11 @@ const app = express();
 const port = process.env.PORT || 8080;  // Use the port defined by Azure Web App
 
 // Serve static files from the Angular build (in 'dist' folder)
-app.use(express.static(path.join(__dirname, 'browser')));
+app.use(express.static(__dirname));
 
 // Handle all other routes and serve the Angular app's index.html
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'browser/index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Start the server
