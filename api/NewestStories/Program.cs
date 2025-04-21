@@ -73,7 +73,15 @@ namespace NewestStories
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ServeUnknownFileTypes = true
+            });
+
             app.MapControllers();
+
+            app.MapFallbackToController("Index", "Fallback");
 
             app.Run();
         }

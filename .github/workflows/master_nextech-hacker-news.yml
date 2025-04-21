@@ -23,6 +23,13 @@ jobs:
         with:
           dotnet-version: '9.x'
 
+      - name: client install, build, and test
+        run: |
+          cd client
+          npm install
+          npm run build
+          npx ng test
+
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
