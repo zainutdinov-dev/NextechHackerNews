@@ -19,6 +19,12 @@ namespace NewestStories
 
             var origins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            var logger = LoggerFactory.Create(config => config.AddConsole()).CreateLogger("Startup");
+            logger.LogInformation($"Running in environment: {builder.Environment.EnvironmentName}");
+            logger.LogInformation($"Cors: {string.Join(",", origins)}");
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowFrontend", policy =>
