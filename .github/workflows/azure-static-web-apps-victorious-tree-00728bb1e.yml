@@ -40,6 +40,7 @@ jobs:
 
   services_build:
     runs-on: ubuntu-latest
+    name: Build Services
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -67,6 +68,7 @@ jobs:
 
   services_deploy:
     runs-on: ubuntu-latest
+    name: Deploy Services
     needs: services_build
     environment:
       name: 'Production'

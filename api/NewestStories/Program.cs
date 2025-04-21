@@ -21,13 +21,15 @@ namespace NewestStories
               ?? builder.Configuration["Cors__AllowedOrigins"]?.Split(",")
               ?? [];
 
+            Console.WriteLine(origins);
+
             builder.Services.AddCors(options =>
             {
-                options.AddDefaultPolicy(policy =>
+                options.AddPolicy("AllowFrontend", policy =>
                 {
-                    policy.WithOrigins(origins) 
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
+                    policy.WithOrigins(origins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
 
@@ -61,6 +63,8 @@ namespace NewestStories
 
             var app = builder.Build();
 
+            app.UseCors("AllowFrontend");
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -68,8 +72,6 @@ namespace NewestStories
             }
 
             app.UseHttpsRedirection();
-
-            app.UseCors();
 
             app.UseAuthorization();
 
