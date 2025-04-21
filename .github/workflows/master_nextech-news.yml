@@ -33,7 +33,8 @@ jobs:
       - name: Copy server.js and install express
         run: |
           cp client/server.js client/dist/client/browser/server.js
-          cp client/server.package.json client/dist/client/browser/package.json.js
+          cp client/server.package.json client/dist/client/browser/package.json
+          cd client/dist/client/browser/
           npm install --omit=dev
 
       - name: Zip artifact for deployment
