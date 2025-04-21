@@ -40,7 +40,7 @@
 ## Readme
 
 ### To deploy:
-This solution uses Azure CI/CD for Angular and Services [Environment File](.github\workflows\azure-static-web-apps-victorious-tree-00728bb1e.yml)
+This solution uses Azure CI/CD for Angular and Services [Environment File](.github/workflows/azure-static-web-apps-victorious-tree-00728bb1e.yml)
 1. The Angular client is deployed to an Azure Static Web App: https://victorious-tree-00728bb1e.6.azurestaticapps.net/
 2. Each API controller is independently deployed to its own Azure App Service.
 - NewestStories: https://nextech-hacker-news.azurewebsites.net/api/neweststories?pageIndex=1&pageSize=12
