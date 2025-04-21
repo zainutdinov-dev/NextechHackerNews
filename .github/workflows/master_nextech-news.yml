@@ -30,10 +30,14 @@ jobs:
           npm run build
           npx ng test
 
+      - name: Copy server.js
+        run: |
+          cp server.js client/dist/client/server.js
+
       - name: Zip artifact for deployment
         run: |
-          cd client/dist/client/browser
-          zip -r ../../../../release.zip .  # <- the dot matters!
+          cd dist/client
+          zip -r ../../release.zip .  # <- the dot matters!
           cd -
 
       - name: Upload artifact for deployment job
