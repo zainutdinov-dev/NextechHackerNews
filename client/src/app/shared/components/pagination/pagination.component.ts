@@ -74,7 +74,7 @@ export class PaginationComponent implements OnChanges {
   calcPages(page: Pagination) {
     if (page.selectedPage < this.SHOW_PAGES_COUNT - 1) {
       this.pageFrom = 1;
-      this.pageTo = Math.min(page.totalPages, this.SHOW_PAGES_COUNT + 1);
+      this.pageTo = Math.min(page.totalPages, this.SHOW_PAGES_COUNT) + 1;
     } else {
       this.pageFrom = Math.max(1, page.selectedPage - Math.floor(this.SHOW_PAGES_COUNT / 2));
       this.pageTo = Math.min(page.totalPages + 1, this.pageFrom + this.SHOW_PAGES_COUNT);

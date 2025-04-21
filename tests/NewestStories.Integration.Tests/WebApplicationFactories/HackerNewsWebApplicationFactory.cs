@@ -8,9 +8,9 @@ using Moq;
 
 namespace NewestStories.Integration.Tests.WebApplicationFactories
 {
-    public class NewestStoriesWebApplicationFactory: WebApplicationFactory<Program>
+    public class HackerNewsWebApplicationFactory: WebApplicationFactory<Program>
     {
-        public Mock<INewestStoriesService> HackerNewsClientMock = new Mock<INewestStoriesService>();
+        public Mock<IHackerNewsClient> HackerNewsClientMock = new Mock<IHackerNewsClient>();
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

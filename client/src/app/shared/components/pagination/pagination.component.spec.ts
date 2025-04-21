@@ -61,6 +61,28 @@ describe('PaginationComponent', () => {
     expect(component.pages).toEqual([1, 2, 3, 4, 5]);
   });
 
+  it('should correctly calculate pages when totalPages less SHOW_PAGES_COUNT', () => {
+    component.pagination = {
+      selectedPage: 1,
+      pageSize: 12,
+      totalItemsCount: 19,
+      totalPages: 2,
+    };
+
+    component.ngOnChanges({
+      pagination: {
+        currentValue: component.pagination,
+        previousValue: undefined,
+        firstChange: true,
+        isFirstChange: () => true
+      }
+    });
+
+    expect(component.pageFrom).toBe(1);
+    expect(component.pageTo).toBe(3);
+    expect(component.pages).toEqual([1, 2]);
+  });
+
   it('should correctly calculate pages when selectedPage >= SHOW_PAGES_COUNT', () => {
     component.pagination = {
       selectedPage: 6,

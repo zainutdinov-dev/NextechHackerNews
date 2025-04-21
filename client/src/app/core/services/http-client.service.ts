@@ -17,6 +17,7 @@ export class HttpClientService {
   }
 
   public get<T>(path: string): Observable<T> {
+
     return this.http.get<T>(this.createUrl(path));
   }
 }
