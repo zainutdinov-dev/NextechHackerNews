@@ -7,10 +7,10 @@
    - Each list item should include the story's title and a link to the article (if available). Handle stories that do not have hyperlinks.
    
 ✅ **Search Functionality:**
-   - Provide a search feature that allows users to search for stories by title or other relevant fields.
+   - Provide a search feature that allows users to search for stories by title.
 
 ✅ **Pagination:**
-   - Implement pagination to ensure that users do not get overloaded with too many stories at once. Limit the number of stories shown per page (e.g., 20-50).
+   - Implement pagination to ensure that users do not get overloaded with too many stories at once.
 
 ✅ **Automated Tests:**
    - Write automated tests to ensure the correctness of your Angular application.
