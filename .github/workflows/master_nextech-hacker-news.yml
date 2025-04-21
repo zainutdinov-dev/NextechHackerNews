@@ -27,11 +27,14 @@ jobs:
         run: |
           cd client
           npm install
-          npm run build
+          npm run build --prod
           npx ng test
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+
+      - name: Run .NET tests
+        run: dotnet test tests/ --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
