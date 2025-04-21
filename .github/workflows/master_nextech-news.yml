@@ -30,15 +30,16 @@ jobs:
           npm run build
           npx ng test
 
-      - name: Copy server.js
+      - name: Copy server.js and install express
         run: |
           cp client/server.js client/dist/client/browser/server.js
+          cp client/server.package.json client/dist/client/browser/package.json.js
+          npm install --omit=dev
 
       - name: Zip artifact for deployment
         run: |
           cd client/dist/client/browser
           zip -r ../../../../release.zip .  # <- the dot matters!
-          cd -
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
