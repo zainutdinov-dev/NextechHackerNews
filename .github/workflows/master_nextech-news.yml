@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - nextech-news
+name: Deploy Angular App to Azure Web App
 
 on:
   push:
@@ -21,16 +21,17 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '22.x'
 
       - name: npm install, build, and test
         run: |
+          cd client
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build
+          npx ng test
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip -r release.zip client/dist
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -60,15 +61,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4F051EDEC6D6400B9AAF296FF78C4916 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_664157B5D9144ED18467EF6404F4DD56 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3BF1520C111341ADA7AD7DA3518F5086 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A6C6F2DF60C2406C9EDB057DC1DAB7AA }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_13ACB02984E94878B7996F31068E6A39 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5C1FA123ADAF41D4ACF559BB44927A01 }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'nextech-news'
+          app-name: 'next-hacker-news'
           slot-name: 'Production'
           package: .
           
