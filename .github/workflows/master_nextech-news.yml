@@ -30,12 +30,9 @@ jobs:
           npm run build
           npx ng test
 
-      - name: Copy server.js and install express
+      - name: Copy web.config
         run: |
-          cp client/server.js client/dist/client/browser/server.js
-          cp client/server.package.json client/dist/client/browser/package.json
-          cd client/dist/client/browser/
-          npm install --omit=dev
+          cp client/server.web.config client/dist/client/browser/web.config
 
       - name: Zip artifact for deployment
         run: |
