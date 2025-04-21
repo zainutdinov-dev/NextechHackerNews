@@ -17,22 +17,6 @@ namespace NewestStories
             builder.Services.Configure<HackerNewsOptions>(
                 builder.Configuration.GetSection("HackerNews"));
 
-            var origins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
-              ?? builder.Configuration["Cors__AllowedOrigins"]?.Split(",")
-              ?? [];
-
-            Console.WriteLine(origins);
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowFrontend", policy =>
-                {
-                    policy.WithOrigins(origins)
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
-
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             builder.Services.AddMemoryCache(options =>
@@ -62,8 +46,6 @@ namespace NewestStories
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
-
-            app.UseCors("AllowFrontend");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
