@@ -40,6 +40,7 @@ jobs:
 
   services_build:
     runs-on: ubuntu-latest
+    needs: build_and_deploy_client
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -50,7 +51,7 @@ jobs:
           dotnet-version: '9.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build NextechHackerNews.sln --configuration Release
 
       - name: Run .NET tests
         run: dotnet test NextechHackerNews.sln --configuration Release
