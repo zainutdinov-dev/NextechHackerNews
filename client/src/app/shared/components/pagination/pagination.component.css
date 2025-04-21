@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+.pagination{
+    @apply   bg-transparent py-3 px-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2
+}
+
+.pagination-info{
+    @apply text-sm text-white
+}
+
+.page-button{
+    @apply p-2 text-white ring-1 ring-gray-300 ring-inset hover:bg-gray-50 hover:text-black cursor-pointer hover:ring-white select-none
+}
+
+.page{
+    @apply py-2 w-10 text-center items-center text-sm font-semibold text-white ring-1 ring-gray-300 ring-inset hover:text-black hover:bg-gray-50 cursor-pointer hover:ring-white select-none
+}
+
+.page-active{
+    @apply py-2 w-10 text-center items-center text-sm font-semibold bg-gray-50  text-black cursor-pointer select-none
+}
